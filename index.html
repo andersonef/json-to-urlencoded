@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>JSON to form-urlencoded</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+function gerar() {
+    var json = document.getElementById('jsonText').value;
+    var objeto = null;
+    try{
+        objeto = JSON.parse(json);
+    } catch (e) {
+        return alert(e);
+    }
+    var params = new URLSearchParams();
+    for(var prop in objeto) {
+        params.append(prop, objeto[prop]);
+    }
+    document.getElementById('result').value = params.toString();
+}
+</script>
+
+</head>
+
+<body class="form form-horizontal">
+<h1>Importante:</h1>
+<ul>
+    <ol>Esse transformador recebe um JSON válido que você queira utilizar em requests do tipo application/x-www-form-urlencoded ou semelhantes</ol>
+</ul>
+<h2>Seu JSON</h2>
+<textarea id="jsonText" cols="50" class="form-control" rows="8"></textarea>
+<br>
+<a class="btn btn-primary" onclick="javascript: gerar()">Gerar</a>
+<br>
+<h2>Resultado:</h2>
+<textarea class="form-control" id="result" cols="50" rows="8"></textarea>
+<hr>
+<div class="text-center">
+<small>Desenvolvido em 5 min. para agilizar desenvolvimento pessoal<br>
+<a href="http://andersonsilva.info" target="_blank">AndersonSilva.info</a>
+</div>
+</body>
